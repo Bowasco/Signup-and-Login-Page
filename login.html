@@ -27,9 +27,9 @@
 <script src="script.js"></script>
 <script>
 
-let user = document.getElementById("user")
-let password = document.getElementById("key")
-let eye = document.getElementById("eye");
+let email = document.getElementById("email")
+let password = document.getElementById("password")
+let confirmPassword = document.getElementById("password_2")
 let userdetails = JSON.parse(localStorage.getItem("userdetails"))
 console.log(userdetails);
 
@@ -39,17 +39,17 @@ function login() {
     console.log(password.value);
     let logIn = userdetails.find(userdetails => userdetails.email == user.value && userdetails.password == password.value)
     console.log(logIn);
-    if (user.value == "" || password.value == "") {
-        alert("Please fill out both email and password fields or sign up if you haven't already.")
+    if (email.value == "" || password.value == "" || confirmPassword.value == "") {
+        alert("Please fill out all email and password fields or sign up if you haven't already.")
     }
     else if (logIn) {
-        alert(`Login successful ${user.value}`)
+        alert(`Login successful ${email.value}`)
     }
     else {
         alert("Account not registered")
     }
     let details = {
-        email: user.value,
+        email: email.value,
         password: password.value
     }
     console.log(details);

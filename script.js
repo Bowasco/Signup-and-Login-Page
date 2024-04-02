@@ -49,7 +49,7 @@ function saveData(){
         } else {
             datas.push(UserDataObj)
             localStorage.setItem("userdetails", JSON.stringify(datas))
-            alert(`Signup successful.  ${username.value}  Please login.`)
+            alert(`Signup successful.  ${email.value}  Please login.`)
             console.log(datas);
         }
 }
