@@ -38,15 +38,30 @@ function saveData(){
         email.value = '';
         phoneNum.value = '';
         password.value = '',
-        confirmPassword.value  = ''
+        confirmPassword.value  = '';
     }
+
+        const existuser = datas.find(user => user.email == email.value);
+        console.log(existuser);
+
+        if (existuser) {
+            alert("E-mail already exist")
+        } else {
+            datas.push(UserDataObj)
+            localStorage.setItem("userdetails", JSON.stringify(datas))
+            alert(`Signup successful.  ${username.value}  Please login.`)
+            console.log(datas);
+        }
 }
 
-showandhide.innerHTML = 'Show'
-function showPass(){
-    password.type == 'password' ? password.type = 'text' : password.type = 'password'
-    showandhide.innerHTML == 'Show' ? showandhide.innerHTML = 'Hide' : showandhide.innerHTML = 'Show'
-}
+
+
+
+// showandhide.innerHTML = 'Show'
+// function showPass(){
+//     password.type == 'password' ? password.type = 'text' : password.type = 'password'
+//     showandhide.innerHTML == 'Show' ? showandhide.innerHTML = 'Hide' : showandhide.innerHTML = 'Show'
+// }
 
 // let displayTable = () => {
 //     table.innerHTML = ''
