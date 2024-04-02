@@ -41,16 +41,16 @@ function saveData(){
         confirmPassword.value  = '';
     }
 
-        const existuser = datas.find(user => user.email == email.value);
+        const existuser = data.find(user => user.email == email.value);
         console.log(existuser);
 
         if (existuser) {
             alert("E-mail already exist")
         } else {
-            datas.push(UserDataObj)
-            localStorage.setItem("userdetails", JSON.stringify(datas))
+            data.push(userDataObj)
+            localStorage.setItem("userdetails", JSON.stringify(data))
             alert(`Signup successful.  ${email.value}  Please login.`)
-            console.log(datas);
+            console.log(data);
         }
 }
 
