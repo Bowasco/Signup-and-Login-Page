@@ -6,6 +6,8 @@ let phoneNum = document.getElementById('phoneNum')
 // let checker = document.getElementById('checker')
 let table = document.getElementById('table')
 let data = []
+let loading = false
+let signupbtn = document.getElementById("signup")
 
 
 
@@ -22,6 +24,8 @@ function saveData(){
     //     alert('Please agree to terms and conditions')
     // }
     else{
+        loading = true;
+        loading? signupbtn.innerHTML =`Please wait ...`:"Sign up";
         let userDataObj = {
             name: fname.value,
             email: email.value,
@@ -31,6 +35,8 @@ function saveData(){
 
         data.push(userDataObj)
         console.log(data);
+
+        localStorage.setItem("info", JSON.stringify(data))
         
         alert('Login Successful')
 
@@ -41,17 +47,17 @@ function saveData(){
         confirmPassword.value  = '';
     }
 
-        const existuser = data.find(user => user.email == email.value);
-        console.log(existuser);
+        // const existuser = data.find(user => user.email == email.value);
+        // console.log(existuser);
 
-        if (existuser) {
-            alert("E-mail already exist")
-        } else {
-            data.push(userDataObj)
-            localStorage.setItem("userdetails", JSON.stringify(data))
-            alert(`Signup successful.  ${email.value}  Please login.`)
-            console.log(data);
-        }
+        // if (existuser) {
+        //     alert("E-mail already exist")
+        // } else {
+        //     data.push(userDataObj)
+        //     localStorage.setItem("userdetails", JSON.stringify(data))
+        //     alert("Signup successful.")
+        //     console.log(data);
+        // }
 }
 
 

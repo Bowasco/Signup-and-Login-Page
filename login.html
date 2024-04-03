@@ -19,53 +19,31 @@
                 <input type="password" id="password" placeholder="Password">
                 <input type="password" id="password_2" placeholder="Confirm Password">
             </form>
-            <button type="button" onclick="login()">LOG IN</button>
+            <button type="button" onclick="login(event)">LOG IN</button>
         </div>
     </div>
 </body>
 </html>
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
 <script>
 
-let email = document.getElementById("email")
-let password = document.getElementById("password")
-let confirmPassword = document.getElementById("password_2")
-let userdetails = JSON.parse(localStorage.getItem("userdetails"))
-console.log(userdetails);
+function login(ev) {
+    let det = JSON.parse(localStorage.getItem("info"));
+    // console.log(det);
 
 
-function login() {
-    console.log(user.value);
-    console.log(password.value);
-    let logIn = userdetails.find(userdetails => userdetails.email == user.value && userdetails.password == password.value)
-    console.log(logIn);
-    if (email.value == "" || password.value == "" || confirmPassword.value == "") {
-        alert("Please fill out all email and password fields or sign up if you haven't already.")
+    ev.preventDefault();
+    console.log(email.value);
+    let found = det.find((el)=> el.email == email.value && el.password == password.value);
+    console.log(found);
+    if(found == undefined){
+        alert("User info not correct");
+        return;
+    }else{
+        alert("Login successfull");
+        window.location.href = "dashboard.html"
     }
-    else if (logIn) {
-        alert(`Login successful ${email.value}`)
-    }
-    else {
-        alert("Account not registered")
-    }
-    let details = {
-        email: email.value,
-        password: password.value
-    }
-    console.log(details);
-
-    email.value = ''
-    password.value = ''
-    confirmPassword.value = ''
-
 }
-
-
-
-
-
-
-
 
 
 
