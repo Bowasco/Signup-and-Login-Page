@@ -1,19 +1,33 @@
-let fullname = document.getElementById('fname')
-let email = document.getElementById('email')
-let password = document.getElementById('password')
-let confirmPassword = document.getElementById('password_2')
-let phoneNum = document.getElementById('phoneNum')
-// let checker = document.getElementById('checker')
-let table = document.getElementById('table')
-let data = []
-let loading = false
-let signupbtn = document.getElementById("signup")
+// let fullname = document.getElementById('fname')
+// let email = document.getElementById('email')
+// let password = document.getElementById('password')
+// let confirmPassword = document.getElementById('password_2')
+// let phoneNum = document.getElementById('phoneNum')
+// // let checker = document.getElementById('checker')
+// let table = document.getElementById('table')
+// let data = []
+// let loading = false
+// let signupbtn = document.getElementById("signup")
 
 
 
 
-function saveData(){
-    if(fullname.value == '' || email.value == '' || password.value == '' || confirmPassword.value == ''){
+function saveData(ev){
+    ev.preventDefault();
+    let username = document.getElementById('username')
+    let email = document.getElementById('email')
+    let password = document.getElementById('password')
+    let confirmPassword = document.getElementById('password_2')
+    let phoneNum = document.getElementById('phoneNum')
+    // let checker = document.getElementById('checker')
+    let table = document.getElementById('table')
+    let data = JSON.parse(localStorage.getItem("info")) || []
+    let loading = false
+    let signupbtn = document.getElementById("signup")
+
+
+
+    if(username.value == '' || email.value == '' || password.value == '' || confirmPassword.value == ''){
         alert ('All field are mandatory')
     }else if(password.value !== confirmPassword.value){
         alert('Password does not match')
@@ -24,27 +38,24 @@ function saveData(){
     //     alert('Please agree to terms and conditions')
     // }
     else{
-        loading = true;
-        loading? signupbtn.innerHTML =`Please wait ...`:"Sign up";
+        // loading = true;
+        // loading? signupbtn.innerHTML =`Please wait ...`:"Sign up";
+
         let userDataObj = {
-            name: fname.value,
+            username: username.value,
             email: email.value,
             password: password.value,
             // terms: checker.checked
         }
-
         data.push(userDataObj)
-        console.log(data);
-
         localStorage.setItem("info", JSON.stringify(data))
-        
-        alert('Login Successful')
 
-        fullname.value = '',
+        username.value = '',
         email.value = '';
         phoneNum.value = '';
         password.value = '',
         confirmPassword.value  = '';
+        alert('Signup Successful')
     }
 
         // const existuser = data.find(user => user.email == email.value);
@@ -59,6 +70,42 @@ function saveData(){
         //     console.log(data);
         // }
 }
+
+
+
+function authenticate() {
+    localStorage.setItem("isAuthenticated", "true");
+    window.location.href = "login.html";
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

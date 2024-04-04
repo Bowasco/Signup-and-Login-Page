@@ -27,18 +27,19 @@
 <!-- <script src="script.js"></script> -->
 <script>
 
-function login(ev) {
+    let email = document.getElementById("email")
+    let password = document.getElementById("password")
     let det = JSON.parse(localStorage.getItem("info"));
-    // console.log(det);
+    console.log(det);
 
 
+function login(ev) {
     ev.preventDefault();
     console.log(email.value);
     let found = det.find((el)=> el.email == email.value && el.password == password.value);
     console.log(found);
     if(found == undefined){
         alert("User info not correct");
-        return;
     }else{
         alert("Login successfull");
         window.location.href = "dashboard.html"
