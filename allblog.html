@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="blogSection">
+
+
+
+
+    </div>
+    
+</body>
+</html>
+<script>
+let blogPosts = JSON.parse(localStorage.getItem('blogPost')) 
+console.log(blogPosts);
+
+function showPost() {
+        blogSection.innerHTML = ''
+        blogPosts.forEach((element, index) => {
+            blogSection.innerHTML += ` <div>  <p> ${element.name} </p> 
+            <p> ${element.address}</p> <p>${element.blogComment} </p>
+            <img width="200px" height="200px" src="${element.image}"/>
+            <button onclick="likePost(${index})"> like </button>
+            <button onclick="delPost(${index})"> Delete </button>
+            <p> ${element.liked == false ? 'notliked' : 'liked'} </p> 
+            <p>${element.date} </p> </div> `
+        });
+    }
+
+    showPost()
+
+    function likePost(i) {
+        let post = {
+            name: blogPosts[i].name,
+            address: blogPosts[i].address,
+            blogComment: blogPosts[i].blogComment,
+            liked: !blogPosts[i].liked,
+            image: blogPosts[i].image , 
+            date: blogPosts[i].date
+        }   
+
+        blogPosts.splice(i, 1, post)
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts))
+        showPost()
+
+    }
+
+    function delPost(i){
+        blogPosts.splice(i, 1)
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts))
+        showPost()
+    }
+
+</script>

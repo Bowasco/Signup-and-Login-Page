@@ -42,6 +42,7 @@ function login(ev) {
         alert("User info not correct");
     }else{
         alert("Login successfull");
+        localStorage.setItem("user", JSON.stringify(found))
         window.location.href = "dashboard.html"
     }
 }

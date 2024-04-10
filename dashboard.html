@@ -4,28 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        let isAuthenticated = localStorage.getItem("isAuthenticated");
-        if (!isAuthenticated) {
-          window.location.href = "login.html";
-        }
-    </script>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <main>
+    <header>
         <h1>WELCOME</h1>
         <button type="button" onclick="logout()">Logout</button>
-    </main>
+    </header>
+    <form>
+        <h2>Make a post</h2>
+
+        <br>
+
+        <div class="top">
+            <label>Topic:</label>
+            <input id="topic" type="text">
+        </div>
+
+        <br>
+
+        <div class="top">
+            <label>Email:</label>
+            <input id="address" type="email">
+        </div>
+
+        <br>
+        
+        <div class="desc">
+            <textarea id="blogComment" cols="40" rows="10" placeholder="What do you have to say"></textarea>
+        </div>
+
+        <br><br>
+
+        <div>
+            <label>Upload Picture:</label>
+            <input onchange="readFile()" type="file" id="formFileLg">
+        </div>
+
+        <br><br>
+        <button onclick="sendBlog()" type="button">Submit</button>
+    </form>
 </body>
 </html>
 <script>
 
-function logout(){
-    localStorage.removeItem("email")
-    window.location.href = "login.html"
-}
+    'use strict'
+    let details = JSON.parse(localStorage.getItem("user"))
+    let blogSection = document.getElementById('blogSection')
+    let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || []
+    let image = localStorage.getItem('data') || ''
+
+    let isAuthenticated = localStorage.getItem("user");
+        if (!isAuthenticated) {
+          window.location.href = "login.html";
+        }
+
+
+    function logout(){
+        localStorage.removeItem("user")
+        window.location.href = "login.html"
+    }
 
 
 
+    function readFile() {
+        let Myfile = document.getElementById('formFileLg')
+        console.log(Myfile.files[0]);
+        Myfile = Myfile.files[0]
+        let reader = new FileReader()
+
+        reader.addEventListener("load", (e) => {
+            let data = e.target.result
+            localStorage.setItem('data', data)
+        })
+
+        if (Myfile) {
+            reader.readAsDataURL(Myfile)
+        }
+    }
+
+    function sendBlog() {
+        let topic = document.getElementById("topic")
+        let address = document.getElementById("address")
+        let blogComment = document.getElementById("blogComment")
+        let date = new Date
+
+        let post = {
+            topic: topic.value,
+            address: address.value,
+            blogComment: blogComment.value,
+            image: localStorage.getItem('data'),
+            date: date.toLocaleDateString(),fv  
+        }
+
+        blogPosts.push(post)
+        localStorage.setItem('blogPost', JSON.stringify(blogPosts))
+        alert("Blog Posted Successfully")
+
+        topic.value = ''
+        address.value = ''
+        blogComment.value = ''     
+        formFileLg.value = ''
+        localStorage.removeItem('data')
+
+    }
 
 </script>
